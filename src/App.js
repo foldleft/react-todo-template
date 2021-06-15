@@ -14,9 +14,6 @@ export function TodoItem({ text, complete, onClick, onDelete }) {
         {complete ? "☑" : "☐"}
       </button>
       <span>{text}</span>
-      <button className="deleteButton" onClick={onDelete}>
-        ×
-      </button>
     </li>
   );
 }
@@ -28,13 +25,15 @@ export default function App() {
   const [input, setInput] = useState("");
 
   const updateItem = (index) => () => {
-    // Implement me
-  };
-
-  const deleteItem = (index) => () => {
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
+    setItems(
+      items.map((item, i) => {
+        if (index === i) {
+          return { ...item, complete: !item.complete };
+        } else {
+          return item;
+        }
+      })
+    );
   };
 
   return (
@@ -42,12 +41,7 @@ export default function App() {
       <h2>Todo</h2>
       <ul>
         {items.map((item, i) => (
-          <TodoItem
-            {...item}
-            key={i}
-            onClick={updateItem(i)}
-            onDelete={deleteItem(i)}
-          />
+          <TodoItem {...item} key={i} onClick={updateItem(i)} />
         ))}
         <li>
           <input
