@@ -5,22 +5,24 @@ import "./styles.css";
 /*
 Hooks reference: https://reactjs.org/docs/hooks-intro.html
 Hooks API reference: https://reactjs.org/docs/hooks-reference.html
+
+CORS-friendly sample data: https://jsonplaceholder.typicode.com/users/1/todos
 */
 
-export function TodoItem({ text, complete, onClick, onDelete }) {
+export function TodoItem({ title, completed, onClick }) {
   return (
     <li>
       <button className="checkButton" onClick={onClick}>
-        {complete ? "☑" : "☐"}
+        {completed ? "☑" : "☐"}
       </button>
-      <span>{text}</span>
+      <span>{title}</span>
     </li>
   );
 }
 
 export default function App() {
   const [items, setItems] = useState([
-    { text: "Example item", complete: false }
+    { title: "Example item", completed: false }
   ]);
   const [input, setInput] = useState("");
 
@@ -28,7 +30,7 @@ export default function App() {
     setItems(
       items.map((item, i) => {
         if (index === i) {
-          return { ...item, complete: !item.complete };
+          return { ...item, completed: !item.completed };
         } else {
           return item;
         }
@@ -52,7 +54,7 @@ export default function App() {
             onKeyUp={({ key }) => {
               if (key === "Enter") {
                 if (input === "") return;
-                const item = { text: input, complete: false };
+                const item = { title: input, completed: false };
                 setItems([...items, item]);
                 setInput("");
               }
