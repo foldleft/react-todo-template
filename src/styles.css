@@ -1,4 +1,23 @@
 .App {
   font-family: sans-serif;
-  text-align: center;
+  font-size: 30px;
+}
+
+.checkButton {
+  border: none;
+  background: none;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 0;
+  font: inherit;
+}
+
+.deleteButton {
+  font: inherit;
+  color: #999;
+  border-radius: 4px;
+  border: none;
+  margin-left: 8px;
+  padding: 0px 0.5ex;
+  line-height: 1em;
 }
