@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 import "./styles.css";
 
@@ -27,21 +27,15 @@ export default function App() {
   ]);
   const [input, setInput] = useState("");
 
-  const updateItem = useCallback(
-    (index) => () => {
-      // Implement me
-    },
-    []
-  );
+  const updateItem = (index) => () => {
+    // Implement me
+  };
 
-  const deleteItem = useCallback(
-    (index) => () => {
-      const newItems = [...items];
-      newItems.splice(index, 1);
-      setItems(newItems);
-    },
-    [items]
-  );
+  const deleteItem = (index) => () => {
+    const newItems = [...items];
+    newItems.splice(index, 1);
+    setItems(newItems);
+  };
 
   return (
     <div className="App">
