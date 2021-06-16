@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 
 import "./styles.css";
@@ -9,20 +10,25 @@ Hooks API reference: https://reactjs.org/docs/hooks-reference.html
 CORS-friendly sample data: https://jsonplaceholder.typicode.com/users/1/todos
 */
 
-export function TodoItem({ title, completed, onClick }) {
+export function TodoItem({ title, completed, created, onClick }) {
   return (
     <li>
       <button className="checkButton" onClick={onClick}>
         {completed ? "☑" : "☐"}
       </button>
-      <span>{title}</span>
+      <div className="item">
+        <span>{title}</span>
+        <span className="created">
+          {created && dayjs(created).format("dddd HH:mm")}
+        </span>
+      </div>
     </li>
   );
 }
 
 export default function App() {
   const [items, setItems] = useState([
-    { title: "Example item", completed: false }
+    { title: "Example item", completed: false, created: new Date() }
   ]);
   const [input, setInput] = useState("");
 
@@ -54,7 +60,11 @@ export default function App() {
             onKeyUp={({ key }) => {
               if (key === "Enter") {
                 if (input === "") return;
-                const item = { title: input, completed: false };
+                const item = {
+                  title: input,
+                  completed: false,
+                  created: new Date()
+                };
                 setItems([...items, item]);
                 setInput("");
               }
